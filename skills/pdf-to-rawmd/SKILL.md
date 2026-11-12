@@ -5,11 +5,11 @@ description: PDF·PPTX 강의자료를 원문·표·수식·실제 그림을 보
 
 # PDF / PPTX → RAW MD
 
-[RAW_MD_STANDARD.md](references/RAW_MD_STANDARD.md)의 형식으로 원본을 전사한다. 산출물은 `[원본파일명]_rawmd.md`와 같은 폴더의 `동봉 이미지/`에 둔다. 명령 예시는 이 스킬 폴더를 기준으로 한다. Python 환경에 PyMuPDF, python-pptx, Pillow가 필요하다.
+[RAW_MD_STANDARD.md](references/RAW_MD_STANDARD.md)의 형식과 폴더 구조로 원본을 전사한다. 강의록마다 전용 폴더를 새로 만들고 RAW MD와 해당 강의록의 `동봉 이미지/`를 함께 둔다. 명령 예시는 이 스킬 폴더를 기준으로 한다. Python 환경에 PyMuPDF, python-pptx, Pillow가 필요하다.
 
 ## 1. 범위 배정
 
-Main은 원본 경로, 페이지 범위, 출력 위치를 확인하고 실행 전용 작업 폴더를 만든다. 로컬 도구로 페이지 수와 분할 범위를 구한다.
+Main은 원본 경로, 페이지 범위, 출력 상위 폴더를 확인한다. 그 아래에 원본 파일명에서 확장자만 뺀 이름의 강의 폴더와 내부 `동봉 이미지/`를 먼저 만든다. 같은 이름의 폴더가 있으면 `_2`, `_3`처럼 사용하지 않은 접미사를 붙인 새 폴더를 선택한다. 여러 강의록을 한 번에 처리해도 각각 분리한다. 임시 작업 폴더는 따로 만들고 로컬 도구로 페이지 수와 분할 범위를 구한다.
 
 ```text
 python scripts/rawmd.py plan INPUT --pages 1-30
@@ -49,11 +49,11 @@ Main은 작업 전반에서 페이지·파일·상태 메타데이터만 받는�
 
 1. Main은 변환을 맡지 않은 검토자에게 새 컨텍스트로 최대 15페이지씩 배정한다. 검토자는 원본과 작업 파일을 대조해 **담당 전 페이지, 모든 표, 모든 학습 Figure**를 확인한다. 텍스트·순서·강조·수식, 표의 행·열·셀 병합, Figure의 레이블·관계·실제 크롭과 임베드를 확인한다. 자동 텍스트 검사와 이미지 후보는 검토를 보조한다. 검토자는 이미 있는 렌더를 활용하고 필요한 부분만 추가로 확대한다.
 2. 검토자는 문제 페이지, 위치, 수정할 내용, 판독·렌더의 한계를 QA 기록에 남긴다. Main에는 검토한 범위·문제 페이지·QA 기록 경로만 보낸다. 수정 작업자는 지적된 부분을 고치고 검토자는 수정한 부분과 인접 영향 범위를 다시 확인한다. 미해결 범위는 새 작업자에게 배정하거나 원본의 한계와 함께 보고한다.
-3. Main은 독립 검토를 확인하고 채택한 PNG를 최종 MD의 형제 폴더 `동봉 이미지/`에 둔다. 로컬 코드로 작업 파일을 원본 순서대로 결합한다. 원본, 기존 MD, 기존 이미지는 사용자 승인 없이 덮어쓰거나 이동·삭제하지 않는다. 파일이 충돌하면 쓰기 전에 새 이름으로 해결한다.
+3. Main은 독립 검토를 확인하고 채택한 PNG를 해당 강의 폴더의 `동봉 이미지/`에 둔다. 로컬 코드로 작업 파일을 원본 순서대로 결합해 같은 강의 폴더에 `[원본파일명(확장자 제외)]_rawmd.md`로 저장한다. 상위 폴더의 공용 이미지 폴더를 사용하지 않는다. 원본, 기존 MD, 기존 이미지는 사용자 승인 없이 덮어쓰거나 이동·삭제하지 않는다.
 
    ```text
-   python scripts/rawmd.py merge INPUT --chunk JOB/chunk_01.md --chunk JOB/chunk_02.md --out FINAL.md --pages 1-30 --slug SLUG
-   python scripts/rawmd.py validate INPUT FINAL.md --pages 1-30 --slug SLUG
+   python scripts/rawmd.py merge INPUT --chunk JOB/chunk_01.md --chunk JOB/chunk_02.md --out "LECTURE_DIR/INPUT_STEM_rawmd.md" --pages 1-30 --slug SLUG
+   python scripts/rawmd.py validate INPUT "LECTURE_DIR/INPUT_STEM_rawmd.md" --pages 1-30 --slug SLUG
    ```
 
    기계 검증은 페이지 번호·누락·중복, UTF-8, 임베드 경로·실제 PNG를 검사한다. 종료 코드와 경고를 모두 확인한다. Figure에 이미지가 없거나 이번 실행의 이미지가 참조되지 않으면 해당 페이지를 다시 확인한다. 최종 답변에는 산출물 경로, 페이지·그림 수, 독립 검토 결과와 남은 문제를 적는다.
