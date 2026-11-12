@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "med-education-lite",
+  "description": "Token-conscious medical education skills with source-faithful outputs and independent review.",
+  "author": { "name": "Med Education Plugin contributors" },
+  "homepage": "https://github.com/charley031204/med-education-lite",
+  "repository": "https://github.com/charley031204/med-education-lite",
+  "license": "MIT",
+  "keywords": ["medical-education", "obsidian", "pdf", "pptx"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Med Education Lite",
+        "shortDescription": "Source-faithful RAW MD with less repeated context",
+        "longDescription": "Convert PDF and PPTX lectures to RAW Markdown with actual figures and independent full review. Native drafts and bounded page packets reduce repeated generation. No permanent source-map workflow.",
+        "developerName": "Med Education Plugin contributors",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": ["pdf-to-rawmd로 이 강의자료를 원문과 실제 그림을 보존한 RAW MD로 변환해줘."]
+      }
+    }
+  }
+}

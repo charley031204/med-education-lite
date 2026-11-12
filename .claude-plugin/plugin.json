@@ -1,0 +1,9 @@
+{
+  "name": "med-education-lite",
+  "description": "Token-conscious medical education skills with source-faithful outputs and independent review.",
+  "author": { "name": "Med Education Plugin contributors" },
+  "homepage": "https://github.com/charley031204/med-education-lite",
+  "repository": "https://github.com/charley031204/med-education-lite",
+  "license": "MIT",
+  "skills": "./skills/"
+}

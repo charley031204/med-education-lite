@@ -1,0 +1,13 @@
+{
+  "name": "med-education-lite-marketplace",
+  "owner": { "name": "charley031204" },
+  "metadata": { "description": "Independent lightweight medical education skills" },
+  "plugins": [
+    {
+      "name": "med-education-lite",
+      "source": "./",
+      "description": "Source-faithful lecture conversion with reduced context overhead",
+      "strict": true
+    }
+  ]
+}
