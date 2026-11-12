@@ -246,6 +246,25 @@ class RawmdCLI(unittest.TestCase):
                      "--packet", draft / "nested.txt", code=2)
         self.assertFalse(draft.exists())
 
+    def test_original_pdf_bytes_remain_unchanged(self):
+        original = self.pdf.read_bytes()
+        folder = self.run_dir / "immutable-source"
+        commands = [
+            ("plan", self.pdf),
+            ("packet", self.pdf, "--pages", "1"),
+            ("draft", self.pdf, "--pages", "1", "--out", folder / "chunk.md"),
+            ("render", self.pdf, "--pages", "1", "--out-dir", folder / "render"),
+            ("figures", self.pdf, "--pages", "1", "--out-dir", folder / "figures"),
+        ]
+        for command in commands:
+            with self.subTest(command=command[0]):
+                self.command(*command)
+                self.assertEqual(self.pdf.read_bytes(), original)
+        self.command("draft", self.pdf, "--pages", "1", "--out", self.pdf, code=2)
+        self.command("merge", self.pdf, "--chunk", folder / "chunk.md",
+                     "--out", self.pdf, "--pages", "1", code=2)
+        self.assertEqual(self.pdf.read_bytes(), original)
+
 
 if __name__ == "__main__":
     unittest.main()

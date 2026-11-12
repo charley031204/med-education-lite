@@ -1,6 +1,6 @@
 {
   "name": "med-education-lite",
-  "description": "Token-conscious medical education skills with source-faithful outputs and independent review.",
+  "description": "Token-conscious lecture, transcript, study-document and exam-question skills with source-first answers.",
   "author": { "name": "Med Education Plugin contributors" },
   "homepage": "https://github.com/charley031204/med-education-lite",
   "repository": "https://github.com/charley031204/med-education-lite",

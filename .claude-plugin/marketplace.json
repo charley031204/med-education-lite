@@ -6,7 +6,7 @@
     {
       "name": "med-education-lite",
       "source": "./",
-      "description": "Source-faithful lecture conversion with reduced context overhead",
+      "description": "Six source-faithful medical study skills with focused retrieval and reusable document builders",
       "strict": true
     }
   ]

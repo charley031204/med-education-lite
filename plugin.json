@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "med-education-lite",
-  "description": "Token-conscious medical education skills with source-faithful outputs and independent review.",
+  "description": "Token-conscious lecture, transcript, study-document and exam-question skills with source-first answers.",
   "author": { "name": "Med Education Plugin contributors" },
   "homepage": "https://github.com/charley031204/med-education-lite",
   "repository": "https://github.com/charley031204/med-education-lite",
@@ -11,12 +11,12 @@
     "com.openai": {
       "interface": {
         "displayName": "Med Education Lite",
-        "shortDescription": "Source-faithful RAW MD with less repeated context",
-        "longDescription": "Convert PDF and PPTX lectures to RAW Markdown with actual figures and independent full review. Native drafts and bounded page packets reduce repeated generation. No permanent source-map workflow.",
+        "shortDescription": "Lecture-to-study pipeline with less repeated context",
+        "longDescription": "Six focused skills for RAW Markdown, question-only Word, polished page-tagged transcripts, PDF and editable Word study notes, Obsidian explanations and single-question answers. Local indexing, bounded evidence packets and deterministic builders reduce repeated input and generation.",
         "developerName": "Med Education Plugin contributors",
         "category": "Productivity",
         "capabilities": ["Read", "Write"],
-        "defaultPrompt": ["pdf-to-rawmd로 이 강의자료를 원문과 실제 그림을 보존한 RAW MD로 변환해줘."]
+        "defaultPrompt": ["pdf-to-rawmd로 이 강의자료를 원문과 실제 그림을 보존한 RAW MD로 변환해줘.", "transcript-pdf-study로 녹음정제 PART 2와 강의록·기출을 반영한 PDF와 Word 정리본을 만들어줘.", "yama-question-answer로 이 한 문항을 강의록과 Script 근거부터 찾아 설명해줘."]
       }
     }
   }

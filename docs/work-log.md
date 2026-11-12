@@ -24,3 +24,12 @@
 - Local installed skill: all 11 source files unchanged by SHA-256 comparison.
 - No actual source documents, rendered pages, local dependencies or temporary extraction files enter Git.
 - Detailed scope and limits: [validation/pdf-to-rawmd.md](validation/pdf-to-rawmd.md).
+
+## Study pipeline migration
+
+- Six skills now cover RAW, question-only Word, transcript polishing, PDF/Word study notes, Obsidian explanations and single-question answers.
+- User requirements and command names are reflected in [pipeline.md](pipeline.md); detailed verification is in [validation/pipeline.md](validation/pipeline.md).
+- Runtime structure uses local question/transcript indexes, bounded evidence packets, deterministic assembly and a shared DOCX/PDF source.
+- Final integrated run: 29 tests and 10 subtests passed with Word conversion enabled. Independent integration review found no remaining blocking issues.
+- Original PDF immutability is an explicit invariant with byte-preservation and overwrite-rejection regressions.
+- Existing installed source files: 57 checked, zero differences. Personal source materials and actual outputs remain outside Git.
